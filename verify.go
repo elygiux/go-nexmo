@@ -162,7 +162,7 @@ func (c *Verification) Check(m *VerifyCheckRequest) (*VerifyCheckResponse, error
 		return nil, errors.New("invalid message struct - unable to convert to JSON")
 	}
 	b := bytes.NewBuffer(buf)
-	r, err = http.NewRequest("POST", apiRootv2+"/verify/check/json", b)
+	r, err = http.NewRequest("POST", "https://rest.nexmo.com/verify/check/json", b)
 	if err != nil {
 		return nil, err
 	}
@@ -252,7 +252,7 @@ func (c *Verification) Search(m *VerifySearchRequest) (*VerifySearchResponse, er
 	}
 
 	b := bytes.NewBuffer(buf)
-	r, err = http.NewRequest("POST", apiRootv2+"/verify/search/json", b)
+	r, err = http.NewRequest("POST", "https://rest.nexmo.com/verify/search/json", b)
 	if err != nil {
 		return nil, err
 	}
@@ -335,7 +335,7 @@ func (c *Verification) Control(m *VerifyControlRequest) (*VerifyControlResponse,
 	}
 
 	b := bytes.NewBuffer(buf)
-	r, err = http.NewRequest("POST", apiRootv2+"/verify/control/json", b)
+	r, err = http.NewRequest("POST", "https://rest.nexmo.com/verify/control/json", b)
 	if err != nil {
 		return nil, err
 	}
