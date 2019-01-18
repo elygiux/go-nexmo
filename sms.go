@@ -220,7 +220,7 @@ func (c *SMS) Send(msg *SMSMessage) (*MessageResponse, error) {
 		return nil, errors.New("invalid message struct - unable to convert to JSON")
 	}
 	b := bytes.NewBuffer(buf)
-	r, _ = http.NewRequest("POST", apiRoot+"/sms/json", b)
+	r, _ = http.NewRequest("POST", "https://rest.nexmo.com/sms/json", b)
 
 	r.Header.Add("Accept", "application/json")
 	r.Header.Add("Content-Type", "application/json")

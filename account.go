@@ -21,7 +21,7 @@ func (nexmo *Account) GetBalance() (float64, error) {
 
 	var accBalance *AccountBalance
 
-	r, reqErr := http.NewRequest("GET", apiRoot+"/account/get-balance/"+
+	r, reqErr := http.NewRequest("GET", "https://rest.nexmo.com/account/get-balance/"+
 		nexmo.client.apiKey+"/"+nexmo.client.apiSecret, nil)
 
 	if reqErr != nil {

@@ -82,7 +82,7 @@ func (c *USSD) Send(msg *USSDMessage) (*MessageResponse, error) {
 
 	valuesReader := bytes.NewReader([]byte(values.Encode()))
 	var r *http.Request
-	r, _ = http.NewRequest("POST", apiRoot+endpoint, valuesReader)
+	r, _ = http.NewRequest("POST", "https://rest.nexmo.com"+endpoint, valuesReader)
 
 	r.Header.Add("Accept", "application/json")
 	r.Header.Add("Content-Type", "application/x-www-form-urlencoded")

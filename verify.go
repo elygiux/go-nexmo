@@ -76,7 +76,7 @@ func (c *Verification) Send(m *VerifyMessageRequest) (*VerifyMessageResponse, er
 	}
 
 	b := bytes.NewBuffer(buf)
-	r, err = http.NewRequest("POST", apiRootv2+"/verify/json", b)
+	r, err = http.NewRequest("POST", "https://rest.nexmo.com/verify/json", b)
 	if err != nil {
 		return nil, err
 	}
