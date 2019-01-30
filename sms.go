@@ -193,7 +193,7 @@ type MessageResponse struct {
 	MessageCount int             `json:"message-count,string"`
 	Messages     []MessageReport `json:"messages"`
 }
-
+ 
 // Send the message using the specified SMS client.
 func (c *SMS) Send(msg *SMSMessage) (*MessageResponse, error) {
 	if len(msg.From) <= 0 {
