@@ -282,3 +282,11 @@ func B2S(bs []uint8) string {
 	}
 	return string(b)
 }
+
+func (e *MessageResponse) String() string {
+	if json, err := json.Marshal(e); err == nil {
+		return string(json)
+	} else {
+		return "{}"
+	}
+}
