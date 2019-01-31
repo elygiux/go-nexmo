@@ -6,6 +6,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"strconv"
 )
 
 // SMS represents the SMS API functions for sending text messages.
@@ -253,7 +254,31 @@ func (c *SMS) Send(msg *SMSMessage) (*MessageResponse, error) {
 
 	err = json.Unmarshal(body, &messageResponse)
 	if err != nil {
-		return nil, err
+		err2 := &ErrorData{s:err.Error(), Data:body, OriginalError:err}
+		return nil, err2
 	}
 	return messageResponse, nil
+}
+
+type ErrorData struct {
+	s string
+	Data interface{}
+	OriginalError error
+}
+
+func (e *ErrorData) Error() string {
+
+	if syntaxError, ok := e.OriginalError.(*json.SyntaxError); ok {
+		return ("JSON syntax error. Body: " + B2S(e.Data.([]uint8)) + " Offset: " + strconv.Itoa(int(syntaxError.Offset)))
+	} else {
+		return e.s
+	}
+}
+
+func B2S(bs []uint8) string {
+	b := make([]byte, len(bs))
+	for i, v := range bs {
+		b[i] = byte(v)
+	}
+	return string(b)
 }
